@@ -10,18 +10,12 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip    clear_clip;
     public AudioClip    slide_clip;
- 
 
     public bool updatingSound = false;
 
     private void Awake()
     {
         sharedInstance = this;
-    }
-
-    private void Start()
-    {
-        
     }
 
     public void OnClearCookies()

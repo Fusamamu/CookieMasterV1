@@ -26,14 +26,6 @@ public class Matching : MonoBehaviour
     public UnityEvent COLUMN_CLEAR;
     public UnityEvent FinishUpdate;
 
-    //public enum State
-    //{
-    //    Finding_matching,
-    //    ROW_MATCHED_UPDATING,
-    //    COLUMN_MATCHED_UPDATING
-    //}
-    //private State currentState = State.Finding_matching;
-
     public struct Match_INFO
     {
         public List<GameObject> matched_row;
@@ -45,7 +37,6 @@ public class Matching : MonoBehaviour
     }
 
     private Match_INFO _match_INFO;
-
 
     private void Awake()
     {
@@ -80,34 +71,6 @@ public class Matching : MonoBehaviour
                     COLUMN_CLEAR.Invoke();
                 }
 
-                #region tempCode
-                //move top row down;
-                //for (int j = currentMatched_ROW + 1; j < _grid.ROW - 1; j++)
-                //{
-                //    for(int i = 1; i < _grid.COLUMN - 1; i++)
-                //    {
-                //        _grid.Move(_grid.GridBlocks[i, j], _grid.GridPositions[i, j - 1]);
-                //    }
-                //}
-
-                //int colIndex = 1;
-                //foreach(GameObject _cookie in _temp_Top_ROW)
-                //{
-                //    _grid.Move(_cookie, _grid.GridPositions[colIndex, _grid.ROW - 2]);
-                //    colIndex++;
-                //}
-
-                //for(int i = 1; i < _grid.COLUMN - 1; i++)
-                //{
-                //    _grid.Move(_temp_Top_ROW[i - 1], _grid.GridPositions[i, _grid.ROW - 2]);
-
-                //    for (int j = currentMatched_ROW + 1; j < _grid.ROW - 1; j++)
-                //    {
-                //        _grid.Move(_grid.GridBlocks[i, j], _grid.GridPositions[i, j - 1]);
-                //    }
-                //}
-                #endregion
-
                 Move_COOKIES_POSITION();
 
                 if (AllStopMoving())
@@ -127,20 +90,7 @@ public class Matching : MonoBehaviour
     {
         bool _matchFound = false;
 
-
-
-        // _temp_Matched_ROW = GetMatching_COOKIES();
-        //_temp_Matched_COLUMN = GetMatching_COOKIES
-
         _match_INFO = GetMatching_COOKIES();
-         
-
-        //if (_temp_Matched_ROW.Count != 0)
-        //{
-        //    _matchFound         = true;
-        //    isUpdateMatching    = true;
-        //    currentMatched_ROW  = _temp_Matched_ROW[0].GetComponent<Cookie>().Row;
-        //}
 
         if (_match_INFO.matched_row.Count != 0)
         {
@@ -195,31 +145,6 @@ public class Matching : MonoBehaviour
         _cookie.GetComponent<Rigidbody>().AddForce(new Vector3(0, random_y, 0), ForceMode.Impulse);
         _cookie.GetComponent<Rigidbody>().AddTorque(new Vector3(random_x, random_y, random_z), ForceMode.Impulse);
     }
-
-    //private List<GameObject> GetMatching_COOKIES()
-    //{
-    //    List<GameObject> _matched_Cookies = new List<GameObject>();
-
-    //    for (int j = 1; j < _grid.ROW - 1; j++)
-    //    {
-    //        if (ROW_isMatching(j, Cookie.TYPE.HEART))
-    //        {
-    //            _matched_Cookies.AddRange(_grid.GetRow(j));
-    //        }
-
-    //        if (ROW_isMatching(j, Cookie.TYPE.CHERRYTOP))
-    //        {
-    //            _matched_Cookies.AddRange(_grid.GetRow(j));
-    //        }
-
-    //        if (ROW_isMatching(j, Cookie.TYPE.SQUARE))
-    //        {
-    //            _matched_Cookies.AddRange(_grid.GetRow(j));
-    //        }
-    //    }
-
-    //    return _matched_Cookies;
-    //}
 
     private Match_INFO GetMatching_COOKIES()
     {
@@ -295,64 +220,6 @@ public class Matching : MonoBehaviour
         }
         return _isMatched;
     }
-
-
-
-    //private bool isMatching(int _column = -1, int _row = -1, Cookie.TYPE _checkedType)
-    //{
-    //    bool _isMatched = false;
-
-    //    List<GameObject> checked_ROW        = _grid.GetRow(_row);
-    //    List<GameObject> checked_COLUMN     = _grid.GetColumn(_column);
-
-
-    //    return _isMatched;
-    //}
-
-    #region temp1
-    //private void UpdateGrid()
-    //{
-    //    Remove_COOKIES(_temp_Matched_ROW);
-
-    //    #region tempCode
-    //    //move top row down;
-    //    //for (int j = currentMatched_ROW + 1; j < _grid.ROW - 1; j++)
-    //    //{
-    //    //    for(int i = 1; i < _grid.COLUMN - 1; i++)
-    //    //    {
-    //    //        _grid.Move(_grid.GridBlocks[i, j], _grid.GridPositions[i, j - 1]);
-    //    //    }
-    //    //}
-
-    //    //int colIndex = 1;
-    //    //foreach(GameObject _cookie in _temp_Top_ROW)
-    //    //{
-    //    //    _grid.Move(_cookie, _grid.GridPositions[colIndex, _grid.ROW - 2]);
-    //    //    colIndex++;
-    //    //}
-
-    //    //for(int i = 1; i < _grid.COLUMN - 1; i++)
-    //    //{
-    //    //    _grid.Move(_temp_Top_ROW[i - 1], _grid.GridPositions[i, _grid.ROW - 2]);
-
-    //    //    for (int j = currentMatched_ROW + 1; j < _grid.ROW - 1; j++)
-    //    //    {
-    //    //        _grid.Move(_grid.GridBlocks[i, j], _grid.GridPositions[i, j - 1]);
-    //    //    }
-    //    //}
-    //    #endregion
-
-    //    Move_COOKIES_POSITION(_temp_Top_ROW);
-
-    //    if (AllStopMoving())
-    //    {
-    //        Update_GRIDBLOCKS();
-
-    //        _temp_Matched_ROW.Clear();
-    //        isUpdateMatching = false;
-    //    }
-    //}
-    #endregion
 
     private void Remove_COOKIES(List<GameObject> _cookies)
     {
@@ -467,8 +334,6 @@ public class Matching : MonoBehaviour
                 _grid.GridBlocks[i, _grid.ROW - 2].name = "(" + i + ", " + (_grid.ROW - 2) + ")";
                 index++;
             }
-
-           // ROW_CLEAR.Invoke();
         }
 
         if (_match_INFO.isMatched_COLUMN)
@@ -492,8 +357,6 @@ public class Matching : MonoBehaviour
                 _grid.GridBlocks[_grid.COLUMN - 2, j].name = "(" + (_grid.COLUMN - 2) + ", " + j + ")";
                 index++;
             }
-
-           // COLUMN_CLEAR.Invoke();
         }
     }
 }

@@ -45,6 +45,8 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
+
         _grid       = Grid.sharedInstance;
         _mouseSlide = MouseSlide.sharedInstance;
 
@@ -229,7 +231,6 @@ public class Controller : MonoBehaviour
 
     private void Update_GRID()
     {
-
         switch (previousAction)
         {
             case ACTION.SLIDEROW_R:
@@ -309,16 +310,10 @@ public class Controller : MonoBehaviour
 
                 break;
         }
-
-        //currentSelectedBlock = _grid.GridBlocks[current_column, current_row];
-        //Highlight_Block(currentSelectedBlock);
     }
 
     void MoveSelectedBlock(MOVE_DIR moveDir)
     {
-        // SetColor_ROW_n_COLUMN(false);
-       // UnHightlight_Block(currentSelectedBlock);
-
         switch (moveDir)
         {
             case MOVE_DIR.left:
@@ -339,11 +334,6 @@ public class Controller : MonoBehaviour
         current_row     = Mathf.Clamp(current_row, 1, _grid.ROW - 2);
 
         currentSelectedBlock = _grid.GridBlocks[current_column, current_row];
-
-        // SetColor_ROW_n_COLUMN(true);
-
-       // Highlight_Block(currentSelectedBlock);
-
     }
 
     void Highlight_Block(GameObject _block)

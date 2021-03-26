@@ -30,11 +30,6 @@ public class Grid : MonoBehaviour
         InitilizeGrid();
     }
 
-    private void Start()
-    {
-       
-    }
-
     private void InitilizeGrid()
     {
         for(int i = 0; i < COLUMN; i++)
